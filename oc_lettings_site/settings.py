@@ -15,6 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Application definition
 
@@ -26,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'lettings',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +92,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
+# InternationalizationAUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'

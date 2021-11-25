@@ -45,6 +45,7 @@ def test_letting_index_access(client):
     url = reverse("lettings_index")
     response = client.get(url)
     assert response.status_code == 200
+    assert b"Lettings" in response.content
 
 
 @pytest.mark.django_db

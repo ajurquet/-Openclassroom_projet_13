@@ -41,6 +41,8 @@ def test_profile_list_access(client):
     url = reverse('profiles_index')
     response = client.get(url)
     assert response.status_code == 200
+    assert b"Profiles" in response.content
+    
 
 
 @pytest.mark.django_db

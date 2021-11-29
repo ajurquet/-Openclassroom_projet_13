@@ -11,7 +11,7 @@ fake = Faker('en_US')
 class AdressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Address
-    
+
     number = fake.random_int(min=1, max=9998)
     street = fake.street_name()
     city = fake.city()
@@ -23,7 +23,7 @@ class AdressFactory(factory.django.DjangoModelFactory):
 class LettingFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Letting
-    
+
     title = fake.company()
     address = factory.SubFactory(AdressFactory)
 
@@ -34,14 +34,14 @@ register(LettingFactory)
 
 @pytest.fixture
 def letting(db, letting_factory):
-    
+
     letting = letting_factory.create()
     return letting
 
 
 @pytest.mark.django_db
 def test_letting_index_access(client):
-    
+
     url = reverse("lettings_index")
     response = client.get(url)
     assert response.status_code == 200
@@ -50,7 +50,7 @@ def test_letting_index_access(client):
 
 @pytest.mark.django_db
 def test_lettings_access(client, letting):
-      
+
     url = reverse('letting', kwargs={'letting_id': letting.id})
     response = client.get(url)
     assert response.status_code == 200

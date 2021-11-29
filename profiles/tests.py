@@ -8,6 +8,7 @@ from pytest_factoryboy import register
 
 fake = Faker('en_US')
 
+
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
@@ -16,16 +17,16 @@ class UserFactory(factory.django.DjangoModelFactory):
     password = fake.random_int(min=1000, max=99999)
     first_name = fake.first_name()
     last_name = fake.last_name()
-    
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Profile
-    
+
     user = factory.SubFactory(UserFactory)
     favorite_city = fake.city()
-    
+
+
 register(UserFactory)
 register(ProfileFactory)
 
@@ -42,7 +43,6 @@ def test_profile_list_access(client):
     response = client.get(url)
     assert response.status_code == 200
     assert b"Profiles" in response.content
-    
 
 
 @pytest.mark.django_db

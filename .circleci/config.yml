@@ -10,12 +10,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Installation
+          name: Install, then run tests and linting
           command: |
             python -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
             pytest
+            flake8
 
 
 

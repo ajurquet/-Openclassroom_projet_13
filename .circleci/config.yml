@@ -1,0 +1,23 @@
+version: 2.1
+workflows:
+  test-deploy:
+    jobs:
+      - test
+jobs:
+  test:
+    docker:
+    - image: cimg/python:3.10.0
+    steps:
+      - checkout
+      - run:
+          name: Install, then run tests and linting
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+            pytest
+            flake8
+
+
+
+    

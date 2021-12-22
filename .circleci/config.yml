@@ -5,22 +5,22 @@ orbs:
   docker: circleci/docker@2.0.1
 
 workflows:
-  test-deploy:
+  deploy:
     jobs:
-      - build_test
+      - build_and_test
       - build_push_docker_image:
           requires:
-            - build_test
-      - heroku/push-docker-image:
+            - build_and_test
+      - deploy_heroku:
           requires:
-            - build_test
+            - build_and_test
             - build_push_docker_image
           filters:
             branches:
               only: master
               
 jobs:
-  build_test:
+  build_and_test:
     docker:
       - image: cimg/python:3.10.1
     steps:
@@ -39,15 +39,29 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
     steps:
+      - setup_remote_docker
       - checkout
-      - run:
-          name: Build Docker image
-          command: |
-           docker build -t ajurquet/oc-lettings .
-      
+      - docker/check
+      - docker/build:
+          image: $DOCKER_LOGIN/oc-lettings
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
-          tag: "latest"
+      - heroku/check-authentication
+      - heroku/deploy-via-git
+
+          
+  deploy_heroku:
+    docker:
+    - image : $DOCKER_LOGIN/oc-lettings:latest
+    steps:
+      - docker/check:
+          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
+          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
+      - heroku/push-docker-image
+        
+      
+
+
     
 
 

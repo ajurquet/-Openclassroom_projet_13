@@ -46,6 +46,8 @@ jobs:
           image: $DOCKER_LOGIN/oc-lettings
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
+      - heroku/push-docker-image:
+        
           
   deploy_heroku:
     docker:

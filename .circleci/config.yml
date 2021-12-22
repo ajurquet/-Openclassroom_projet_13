@@ -11,7 +11,7 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - heroku/deploy-via-git:
+      - heroku/push-docker-image:
           requires:
             - build_and_test
             - build_push_docker_image

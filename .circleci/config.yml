@@ -5,22 +5,22 @@ orbs:
   docker: circleci/docker@2.0.1
 
 workflows:
-  test-deploy:
+  deploy:
     jobs:
-      - build_test
+      - build_and_test
       - build_push_docker_image:
           requires:
-            - build_test
-      - heroku/push-docker-image:
+            - build_and_test
+      - heroku/deploy-via-git:
           requires:
-            - build_test
+            - build_and_test
             - build_push_docker_image
           filters:
             branches:
               only: master
               
 jobs:
-  build_test:
+  build_and_test:
     docker:
       - image: cimg/python:3.10.1
     steps:
@@ -46,6 +46,7 @@ jobs:
           image: $DOCKER_LOGIN/oc-lettings
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
+
 
     
 

@@ -43,12 +43,10 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: ajurquet/oc-lettings:$CIRCLE_SHA1
-  
-      
+          image: $DOCKER_LOGIN/oc-lettings
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
-          tag: "latest"
+
     
 
 

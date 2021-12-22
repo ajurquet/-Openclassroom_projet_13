@@ -49,10 +49,7 @@ jobs:
           
   deploy_heroku:
     docker:
-      - image : $DOCKER_LOGIN/oc-lettings:latest
-        auth:
-          username: $DOCKER_LOGIN 
-          password: $DOCKERHUB_PASSWORD
+    - image : $DOCKER_LOGIN/oc-lettings:latest
     steps:
       - docker/check:
           docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.

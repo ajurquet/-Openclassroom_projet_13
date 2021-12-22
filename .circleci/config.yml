@@ -44,10 +44,20 @@ jobs:
       - docker/check
       - docker/build:
           image: $DOCKER_LOGIN/oc-lettings
+          extra_build_args: "-t $DOCKER_LOGIN/oc-lettings"
+          tag: 0.1.<< pipeline.number >>
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
+          tag: "latest"
+      - docker/push:
+          image: $DOCKER_LOGIN/oc-lettings
+          tag: 0.1.<< pipeline.number >>
       - heroku/check-authentication
       - heroku/deploy-via-git
+          #post-deploy:
+           # steps:
+            #  - run : python manage.py makemigrations && python manage.py migrate
+
 
           
   deploy_heroku:

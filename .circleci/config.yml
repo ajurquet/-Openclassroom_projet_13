@@ -1,23 +1,56 @@
 version: 2.1
+
+orbs: 
+  heroku: circleci/heroku@1.2.6
+  docker: circleci/docker@2.0.1
+
 workflows:
   test-deploy:
     jobs:
-      - test
+      - build_test
+      - build_push_docker_image:
+          requires:
+            - build_test
+      - heroku/push-docker-image:
+          requires:
+            - build_test
+            - build_push_docker_image
+          filters:
+            branches:
+              only: master
+              
 jobs:
-  test:
+  build_test:
     docker:
-    - image: cimg/python:3.10.0
+      - image: cimg/python:3.10.1
     steps:
       - checkout
       - run:
-          name: Install, then run tests and linting
+          name: Install Django and dependencies
           command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
+           pip install -r requirements.txt
+      - run:
+          name: Run tests and linting
+          command: |
             pytest
             flake8
+
+  build_push_docker_image:
+    docker:
+      - image: cimg/python:3.10.1
+    steps:
+      - checkout
+      - run:
+          name: Build Docker image
+          command: |
+           docker build -t ajurquet/oc-lettings .
+      
+      - docker/push:
+          image: $DOCKER_LOGIN/oc-lettings
+          tag: "latest"
+    
 
 
 
     
+

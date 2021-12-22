@@ -46,7 +46,6 @@ jobs:
           image: $DOCKER_LOGIN/oc-lettings
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
-      - heroku/push-docker-image
           
   deploy_heroku:
     docker:
@@ -55,6 +54,7 @@ jobs:
           username: $DOCKER_LOGIN 
           password: $DOCKERHUB_PASSWORD
     steps:
+      - docker/check
       - heroku/push-docker-image
         
       

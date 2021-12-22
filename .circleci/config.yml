@@ -11,8 +11,6 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - run:
-          command: heroku config:set DISABLE_COLLECTSTATIC=1      
       - heroku/deploy-via-git:
           requires:
             - build_and_test
@@ -21,7 +19,7 @@ workflows:
             branches:
               only: master
               
-runjobs:
+jobs:
   build_and_test:
     docker:
       - image: cimg/python:3.10.1
@@ -54,6 +52,8 @@ runjobs:
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
           tag: 0.1.<< pipeline.number >>
+      - run:
+          command: heroku config:set DISABLE_COLLECTSTATIC=1      
       
           #post-deploy:
            # steps:

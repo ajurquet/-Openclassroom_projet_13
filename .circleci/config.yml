@@ -11,7 +11,8 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - deploy_heroku:
+      - heroku/check-authentication
+      - heroku/deploy-via-git:
           requires:
             - build_and_test
             - build_push_docker_image
@@ -52,21 +53,11 @@ jobs:
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
           tag: 0.1.<< pipeline.number >>
-      - heroku/check-authentication
-      - heroku/deploy-via-git
+      
           #post-deploy:
            # steps:
             #  - run : python manage.py makemigrations && python manage.py migrate
 
-
-          
-  deploy_heroku:
-    docker:
-    - image : $DOCKER_LOGIN/oc-lettings:latest
-    steps:
-      - docker/check:
-          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
-          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
         
       
 

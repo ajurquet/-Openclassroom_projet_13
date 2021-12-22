@@ -46,6 +46,7 @@ jobs:
           image: $DOCKER_LOGIN/oc-lettings
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
+      - heroku/check-authentication
       - heroku/deploy-via-git
 
           

@@ -43,7 +43,7 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: ajurquet/oc-lettings
+          image: ajurquet/oc-lettings:$CIRCLE_SHA1 .
   
       
       - docker/push:

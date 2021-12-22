@@ -11,13 +11,11 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - heroku/push-docker-image:
+      - heroku_deploy:
           requires:
             - build_and_test
             - build_push_docker_image
-          filters:
-            branches:
-              only: master
+      
               
 jobs:
   build_and_test:
@@ -47,6 +45,14 @@ jobs:
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
 
+  heroku_deploy:
+    docker:
+      - image: $DOCKER_LOGIN/oc-lettings
+    steps:
+      - heroku/push-docker-image:
+          filters:
+            branches:
+              only: master
 
     
 

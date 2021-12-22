@@ -11,7 +11,7 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - heroku/check-authentication
+            
       - heroku/deploy-via-git:
           requires:
             - build_and_test

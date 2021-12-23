@@ -57,6 +57,9 @@ jobs:
   deploy_heroku:
     docker:
       - image : $DOCKER_LOGIN/oc-lettings
+        auth:
+          username: $DOCKER_LOGIN
+          password: $DOCKERHUB_PASSWORD  
     steps:
       - setup_remote_docker
       - docker/check

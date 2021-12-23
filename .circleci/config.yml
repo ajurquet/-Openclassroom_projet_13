@@ -11,14 +11,11 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - deploy_heroku:
-      # - heroku/deploy_via_git:
-          requires:
-            - build_and_test
-            - build_push_docker_image
-          filters:
-            branches:
-              only: master
+      - heroku/deploy-via-git:
+          post-steps:
+            - run: python manage.py migrate
+      
+
               
 jobs:
   build_and_test:
@@ -53,20 +50,30 @@ jobs:
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
           tag: 0.1.<< pipeline.number >>
+
          
-  deploy_heroku:
-    docker:
-      - image : $DOCKER_LOGIN/oc-lettings:latest
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKERHUB_PASSWORD  
-    steps:
+ # deploy_heroku:
+   # steps:
+      
+       #   requires:
+       #     - build_and_test
+       #     - build_push_docker_image
+       #   filters:
+       #     branches:
+         #     only: master
+
+    #docker:
+      #- image : $DOCKER_LOGIN/oc-lettings:latest
+       # auth:
+      #    username: $DOCKER_LOGIN
+     #     password: $DOCKERHUB_PASSWORD  
+    #steps:
       #- setup_remote_docker
       #- checkout
-      - docker/install-docker
-      - heroku/install
-      - heroku/check-authentication
-      - heroku/push-docker-image
+      #- docker/install-docker
+      #- heroku/install
+      #- heroku/check-authentication
+      #- heroku/push-docker-image
           
 
           #_herokupost-deploy:

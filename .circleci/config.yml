@@ -59,7 +59,7 @@ jobs:
       - image : $DOCKER_LOGIN/oc-lettings:latest
         auth:
           username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD  
+          password: $DOCKERHUB_PASSWORD  
     steps:
       - setup_remote_docker
       - docker/check

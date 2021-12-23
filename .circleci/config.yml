@@ -52,8 +52,7 @@ jobs:
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
           tag: 0.1.<< pipeline.number >>
-      - run:
-          command: heroku config:set DISABLE_COLLECTSTATIC=1      
+         
       
           #post-deploy:
            # steps:

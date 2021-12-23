@@ -11,7 +11,8 @@ workflows:
       - build_push_docker_image:
           requires:
             - build_and_test
-      - heroku/push-docker-image:
+      - deploy_heroku:
+      # - heroku/deploy_via_git:
           requires:
             - build_and_test
             - build_push_docker_image
@@ -53,8 +54,16 @@ jobs:
           image: $DOCKER_LOGIN/oc-lettings
           tag: 0.1.<< pipeline.number >>
          
-      
-          #post-deploy:
+  deploy_heroku:
+    docker:
+      - image : $DOCKER_LOGIN/oc-lettings
+    steps:
+      - setup_remote_docker
+      - docker/check
+      - heroku/push-docker-image
+          
+
+          #_herokupost-deploy:
            # steps:
             #  - run : python manage.py makemigrations && python manage.py migrate
 

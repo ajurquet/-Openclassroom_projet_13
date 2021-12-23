@@ -63,6 +63,8 @@ jobs:
     steps:
       #- setup_remote_docker
       #- docker/check
+      - checkout
+      - heroku/install
       - heroku/check-authentication
       - heroku/push-docker-image
           

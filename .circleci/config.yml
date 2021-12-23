@@ -61,8 +61,8 @@ jobs:
           username: $DOCKER_LOGIN
           password: $DOCKERHUB_PASSWORD  
     steps:
-      #- setup_remote_docker
-      #- docker/check
+      - setup_remote_docker
+      - docker/check
       - checkout
       - heroku/install
       - heroku/check-authentication

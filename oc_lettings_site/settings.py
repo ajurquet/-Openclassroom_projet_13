@@ -119,3 +119,4 @@ STATICFILES_DIRS = (
 )
 
 django_on_heroku.settings(locals())
+TEST_RUNNER = 'django_on_heroku.HerokuDiscoverRunner'

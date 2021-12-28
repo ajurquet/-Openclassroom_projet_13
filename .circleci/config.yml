@@ -65,7 +65,9 @@ jobs:
       #- docker/install-docker
       - heroku/install
       - heroku/check-authentication
-      - heroku/push-docker-image
+      - run:
+          command: heroku container:login
+      #- heroku/push-docker-image
       
           #requires:
            # - build_and_test

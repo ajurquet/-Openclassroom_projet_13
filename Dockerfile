@@ -3,7 +3,8 @@ FROM python:latest
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt \
- && mkdir /OC-lettings
+ && mkdir /OC-lettings \
+ && apt-get update
 
 COPY . /OC-lettings/
 

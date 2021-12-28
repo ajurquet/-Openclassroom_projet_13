@@ -8,13 +8,13 @@ workflows:
   deploy:
     jobs:
       - build_and_test
-      - build_push_docker_image:
+      - build_push_docker_hub:
           requires:
             - build_and_test
-      - heroku/deploy-via-git:
+      - heroku/push-docker-image:
           requires:
             - build_and_test
-            - build_push_docker_image     
+            - build_push_docker_hub   
 
               
 jobs:
@@ -33,7 +33,7 @@ jobs:
             pytest
             flake8
 
-  build_push_docker_image:
+  build_push_docker_hub:
     docker:
       - image: cimg/python:3.10.1
     steps:

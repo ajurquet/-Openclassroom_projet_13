@@ -12,7 +12,7 @@ workflows:
           requires:
             - build_and_test
      
-      - heroku/push-docker-image:
+      - deploy_docker_image_heroku:
           requires:
             - build_and_test
             - build_push_docker_hub   
@@ -65,9 +65,9 @@ jobs:
       - docker/install-docker-tools
       - heroku/install
       - heroku/check-authentication
-      - run:
-          command: heroku container:login
-      #- heroku/push-docker-image
+      #- run:
+          #command: heroku container:login
+      - heroku/push-docker-image
       
           #requires:
            # - build_and_test

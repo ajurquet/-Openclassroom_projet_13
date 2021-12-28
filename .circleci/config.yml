@@ -12,8 +12,6 @@ workflows:
           requires:
             - build_and_test
       - heroku/deploy-via-git:
-          post-deploy:
-          - run: python manage.py migrate
           requires:
             - build_and_test
             - build_push_docker_image     

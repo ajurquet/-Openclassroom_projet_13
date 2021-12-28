@@ -12,7 +12,7 @@ workflows:
           requires:
             - build_and_test
      
-      - heroku/push-docker-image:
+      - deploy_docker_image_heroku:
           requires:
             - build_and_test
             - build_push_docker_hub   
@@ -53,19 +53,19 @@ jobs:
           tag: 0.1.<< pipeline.number >>
 
          
-  #deploy_docker_image_heroku:
-   # docker:
-    #  - image : $DOCKER_LOGIN/oc-lettings:latest
-     #   auth:
-      #    username: $DOCKER_LOGIN
-      #    password: $DOCKER_PASSWORD  
-    #steps:
-     # - setup_remote_docker
+  deploy_docker_image_heroku:
+    docker:
+      - image : $DOCKER_LOGIN/oc-lettings:latest
+        auth:
+          username: $DOCKER_LOGIN
+          password: $DOCKER_PASSWORD  
+    steps:
+      - setup_remote_docker
       #- checkout
       #- docker/install-docker
       #- heroku/install
      # - heroku/check-authentication
-      #- heroku/push-docker-image
+      - heroku/push-docker-image
       
           #requires:
            # - build_and_test

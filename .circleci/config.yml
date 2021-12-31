@@ -46,13 +46,13 @@ jobs:
       - docker/build:
           image: $DOCKER_LOGIN/oc-lettings
           extra_build_args: "-t $DOCKER_LOGIN/oc-lettings"
-          tag: 0.1.$CIRCLE_SHA1
+          tag: $CIRCLE_SHA1
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
           tag: "latest"
       - docker/push:
           image: $DOCKER_LOGIN/oc-lettings
-          tag: 0.1.$CIRCLE_SHA1
+          tag: $CIRCLE_SHA1
 
 
         

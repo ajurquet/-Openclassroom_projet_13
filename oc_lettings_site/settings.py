@@ -9,7 +9,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join('oc_lettings_site/.env'))
 
 sentry_sdk.init(
     dsn = env('SENTRY_URL'),

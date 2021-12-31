@@ -8,8 +8,11 @@ from sentry_sdk.integrations.django import DjangoIntegration
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env = environ.Env()
-environ.Env.read_env(os.path.join('oc_lettings_site/.env'))
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 sentry_sdk.init(
     dsn = env('SENTRY_URL'),

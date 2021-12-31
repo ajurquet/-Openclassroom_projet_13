@@ -1,7 +1,6 @@
 import os
 import django_on_heroku
 import sentry_sdk
-import os
 import environ
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -15,7 +14,7 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 sentry_sdk.init(
-    dsn = env('SENTRY_URL'),
+    dsn=env('SENTRY_URL'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%

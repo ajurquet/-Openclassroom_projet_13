@@ -75,3 +75,16 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+### Déploiement
+
+Le déploiement du site utilise un pipeline CI/CD, via CircleCI et Heroku. Il ne s'effectue que lors d'un "push" git de la branche master vers le repository.
+Lors de ce push, le pipeline effectue une série de tests de l'application, ainsi que le linting. Puis une image Docker est créée, et uploader sur le DockerHub.
+
+ - Le fichier de configuration de circleCI se trouve dans le répertoire .circleci/config.yml
+ - Le fichier Dockerfile pour créer l'image Docker est à la racine du projet.
+
+Enfin, lorsque ces deux étapes se sont déroulées avec succès, l'application est déployée sur Heroku.
+
+ - L'adresse du site est : https://oc-lettings-123.herokuapp.com/
+ 

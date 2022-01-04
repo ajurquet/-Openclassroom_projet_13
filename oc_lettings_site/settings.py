@@ -152,4 +152,5 @@ STATICFILES_DIRS = (
 )
 
 django_on_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
 TEST_RUNNER = 'django_on_heroku.HerokuDiscoverRunner'

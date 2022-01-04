@@ -25,6 +25,8 @@ workflows:
                 command: |
                   heroku config:set SENTRY_URL=$SENTRY_URL -a oc-lettings-123
                   heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-123
+                  heroku config:set DATABASE_URL=$DATABASE_URL -a oc-lettings-123
+                  heroku config:set SQLITE_URL=$SQLITE_URL -a oc-lettings-123
               
 jobs:
   build_and_test:

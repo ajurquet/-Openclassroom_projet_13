@@ -22,7 +22,7 @@ workflows:
           post-steps:
             - heroku/install
             - run:
-                command:
+                command: |
                   heroku config:set SENTRY_URL=$SENTRY_URL -a oc-lettings-123
                   heroku config:set SECRET_KEY=$SECRET_KEY -a oc-lettings-123
               

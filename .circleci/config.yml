@@ -19,7 +19,7 @@ workflows:
           filters:
            branches:
              only: master
-          post-steps:
+          pre-steps:
             - heroku/install
             - run:
                 command: |

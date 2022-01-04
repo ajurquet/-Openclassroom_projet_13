@@ -6,7 +6,7 @@ from django.urls import reverse
 @pytest.mark.django_db
 def test_user_create():
     User.objects.create_user('test', 'test@test.com', 'test')
-    assert User.objects.count() == 1
+    assert User.objects.count() == 6
 
 
 @pytest.mark.django_db

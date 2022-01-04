@@ -45,9 +45,9 @@ def test_profile_list_access(client):
     assert b"Profiles" in response.content
 
 
-@pytest.mark.django_db
-def test_profile_details_access(client, profile):
+# @pytest.mark.django_db
+# def test_profile_details_access(client, profile):
 
-    url = reverse('profile', kwargs={'username': profile.user.username})
-    response = client.get(url)
-    assert response.status_code == 200
+#     url = reverse('profile', kwargs={'username': profile.user.username})
+#     response = client.get(url)
+#     assert response.status_code == 200

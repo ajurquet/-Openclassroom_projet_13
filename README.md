@@ -1,6 +1,8 @@
 ## Résumé
 
-Site web d'Orange County Lettings
+Refonte du site d'Orange County Lettings, start-up dans le secteur de la location de biens immobiliers.
+
+Réduction des diverses dettes techniques (refaire l'architecture modulaire), ajout d'un pipeline CI/CD, permettant une conteneurisation et déploiement (Docker and Heroku). Surveillance et suivi des erreurs via Sentry.
 
 ## Développement local
 
